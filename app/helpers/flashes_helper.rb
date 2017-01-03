@@ -1,4 +1,4 @@
-module FlashHelper
+module FlashesHelper
   FLASH_CLASS = { alert: "danger", notice: "success", warning: "warning"}.freeze
 
   def flash_class(key)
