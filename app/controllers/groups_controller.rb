@@ -1,11 +1,12 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
-  before_action :find_group_and_check_oermission , only: [:eidt, :update, :destroy]
+  before_action :find_group_and_check_permission , only: [:edit, :update, :destroy]
   def index
     @groups = Group.all
   end
   def show
     @group = Group.find(params[:id])
+    @posts = @group.posts
   end
   def edit
   end
@@ -40,8 +41,8 @@ end
 
   def find_group_and_check_permission
     @group = Group.find(params[:id])
-    if cuurent_user !=@group.user
-      redirect_to root_path, alert: "You have no permission"
+    if current_user !=@group.user
+      redirect_to root_path, alert: "You have no permission."
     end
   end
   def group_params
